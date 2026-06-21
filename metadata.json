@@ -1,0 +1,6 @@
+{
+  "name": "Saimaya Makeup Parlour & Academy",
+  "description": "Premium beauty parlour and makeup training academy in Sinnar, Maharashtra, run by Maya Salke.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --color-gold: #D4AF37;
+  --color-gold-light: #F5E6BE;
+  --color-gold-dark: #A67C1E;
+  --color-purple-dark: #0F0A1C;
+  --color-purple-deep: #1A0F2B;
+  --color-purple-mid: #3B1C5E;
+  --color-purple-royal: #7A33FF;
+  --color-charcoal: #111111;
+  --color-dark-gray: #1A1A1A;
+  --color-luxury-black: #050505;
+}
+
+/* Custom premium styles */
+.gradient-text-gold {
+  background: linear-gradient(135deg, #FFF 30%, #D4AF37 70%, #F5E6BE 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-purple {
+  background: linear-gradient(135deg, #D4AF37 0%, #7A33FF 50%, #1A0F2B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.border-glow-gold {
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+.border-glow-purple {
+  box-shadow: 0 0 15px rgba(122, 51, 255, 0.15);
+  border: 1px solid rgba(122, 51, 255, 0.25);
+}
+
+/* Hide scrollbar for element container when needed */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Luxury card noise overlay styling */
+.luxury-noise {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
