@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { 
   Trophy, 
   Coins, 
@@ -11,7 +11,7 @@ import {
 } from 'lucide-react';
 import { motion } from 'motion/react';
 
-export default function WhyChooseUs() {
+const WhyChooseUs = memo(function WhyChooseUs() {
   const reasons = [
     {
       title: '5+ Years Experience',
@@ -127,4 +127,6 @@ export default function WhyChooseUs() {
       </div>
     </section>
   );
-}
+});
+
+export default WhyChooseUs;

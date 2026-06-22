@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Sparkles, Check, Heart, Trophy, ShieldCheck, Users } from 'lucide-react';
 import { motion } from 'motion/react';
 
-export default function About() {
+const About = memo(function About() {
   const highlights = [
     {
       title: 'Passion for Beauty',
@@ -148,4 +148,6 @@ export default function About() {
       </div>
     </section>
   );
-}
+});
+
+export default About;

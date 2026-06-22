@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { GALLERY_DATA, GalleryItem } from '../types';
 import { Sparkles, Eye, Grid } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
-export default function Gallery() {
+const Gallery = memo(function Gallery() {
   const [activeFilter, setActiveFilter] = useState<string>('all');
 
   const filters = [
@@ -61,19 +61,15 @@ export default function Gallery() {
         </div>
 
         {/* Gallery Grid (Creative Staggered Layout) */}
-        <motion.div 
-          layout
-          className="columns-1 sm:columns-2 md:columns-3 gap-6 space-y-6 w-full"
-        >
+        <div className="columns-1 sm:columns-2 md:columns-3 gap-6 space-y-6 w-full">
           <AnimatePresence mode="popLayout">
             {filteredItems.map((item) => (
               <motion.div
-                layout
                 key={item.id}
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.4 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.3 }}
                 className="break-inside-avoid relative rounded-md overflow-hidden border border-white/5 bg-charcoal group shadow-lg"
               >
                 {/* Image element */}
@@ -112,7 +108,7 @@ export default function Gallery() {
               </motion.div>
             ))}
           </AnimatePresence>
-        </motion.div>
+        </div>
 
         {/* Ready for real uploads overlay info */}
         <div className="mt-16 bg-[#110C1B]/35 border border-[#D4AF37]/15 p-5 rounded-md flex flex-col sm:flex-row items-center justify-between gap-4 max-w-4xl mx-auto text-center sm:text-left">
@@ -144,4 +140,6 @@ export default function Gallery() {
       </div>
     </section>
   );
-}
+});
+
+export default Gallery;

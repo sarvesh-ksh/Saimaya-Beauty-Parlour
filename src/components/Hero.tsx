@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Sparkles, ArrowDown, Award, GraduationCap, Calendar, Star } from 'lucide-react';
 import { motion } from 'motion/react';
 
-export default function Hero() {
+const Hero = memo(function Hero() {
   const handleScrollTo = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -188,4 +188,6 @@ export default function Hero() {
       </div>
     </section>
   );
-}
+});
+
+export default Hero;

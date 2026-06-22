@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { COURSES_DATA, Course } from '../types';
 import { 
   GraduationCap, 
@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
-export default function Academy() {
+const Academy = memo(function Academy() {
   const [selectedCourseIndex, setSelectedCourseIndex] = useState(0);
 
   const perks = [
@@ -255,4 +255,6 @@ export default function Academy() {
       </div>
     </section>
   );
-}
+});
+
+export default Academy;

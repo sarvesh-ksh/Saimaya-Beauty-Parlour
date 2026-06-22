@@ -14,25 +14,41 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['home', 'about', 'services', 'academy', 'why-us', 'gallery', 'testimonials', 'contact'];
-      const scrollPosition = window.scrollY + 200; // offsets offset
+    const sections = ['home', 'about', 'services', 'academy', 'why-us', 'gallery', 'testimonials', 'contact'];
+    
+    const observerOptions = {
+      root: null,
+      rootMargin: '-25% 0px -45% 0px',
+      threshold: 0.05,
+    };
 
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(section);
-            break;
-          }
-        }
+    const activeSectionsState: { [key: string]: boolean } = {};
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        activeSectionsState[entry.target.id] = entry.isIntersecting;
+      });
+
+      // Find the first intersecting section in order
+      const firstActive = sections.find((id) => activeSectionsState[id]);
+      if (firstActive) {
+        setActiveSection(firstActive);
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      sections.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) observer.unobserve(el);
+      });
+    };
   }, []);
 
   return (

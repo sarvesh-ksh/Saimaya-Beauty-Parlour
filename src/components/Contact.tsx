@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, memo } from 'react';
 import { 
   Phone, 
   MapPin, 
@@ -56,7 +56,7 @@ function Counter({ endValue, suffix = '' }: { endValue: number; suffix?: string 
   );
 }
 
-export default function Contact() {
+const Contact = memo(function Contact() {
   return (
     <section id="contact" className="relative bg-[#09090D] border-t border-white/5 py-24 sm:py-32">
       {/* Decorative Blur beacons */}
@@ -274,4 +274,6 @@ export default function Contact() {
       </div>
     </section>
   );
-}
+});
+
+export default Contact;

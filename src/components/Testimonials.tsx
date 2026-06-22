@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { TESTIMONIALS_DATA, Testimonial } from '../types';
 import { Star, MessageSquareQuote, ChevronRight, User } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
-export default function Testimonials() {
+const Testimonials = memo(function Testimonials() {
   const [activeTab, setActiveTab] = useState<string>('all');
 
   const tabs = [
@@ -57,60 +57,59 @@ export default function Testimonials() {
         </div>
 
         {/* Reviews Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <AnimatePresence mode="popLayout">
-            {filteredReviews.map((rev, index) => (
-              <motion.div
-                layout
-                key={rev.id}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-                className="relative p-8 rounded-md border border-white/5 bg-[#0A0A0F]/90 hover:border-gold/30 hover:bg-[#111116] transition-all duration-300 flex flex-col justify-between"
-              >
-                {/* Quote Icon Background ornament */}
-                <div className="absolute top-6 right-6 text-gold/10 pointer-events-none">
-                  <MessageSquareQuote className="w-10 h-10" />
+        <motion.div
+          key={activeTab}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.25 }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          {filteredReviews.map((rev) => (
+            <div
+              key={rev.id}
+              className="relative p-8 rounded-md border border-white/5 bg-[#0A0A0F]/90 hover:border-gold/30 hover:bg-[#111116] transition-all duration-300 flex flex-col justify-between"
+            >
+              {/* Quote Icon Background ornament */}
+              <div className="absolute top-6 right-6 text-gold/10 pointer-events-none">
+                <MessageSquareQuote className="w-10 h-10" />
+              </div>
+
+              <div>
+                {/* Rating Stars */}
+                <div className="flex gap-1.5 mb-5 text-gold">
+                  {Array.from({ length: rev.rating }).map((_, i) => (
+                    <Star key={i} className="w-3.5 h-3.5 fill-gold text-gold" style={{ transitionDelay: `${i * 30}ms` }} />
+                  ))}
                 </div>
 
+                {/* Core Content */}
+                <blockquote className="text-gray-300 text-xs sm:text-sm font-sans leading-relaxed font-light italic">
+                  &ldquo;{rev.content}&rdquo;
+                </blockquote>
+              </div>
+
+              {/* Profile Details at footer */}
+              <div className="mt-8 pt-6 border-t border-white/5 flex gap-4 items-center">
+                <div className="p-3 bg-purple-dark/50 border border-gold/15 rounded-full text-gold">
+                  <User className="w-4 h-4" />
+                </div>
                 <div>
-                  {/* Rating Stars */}
-                  <div className="flex gap-1.5 mb-5 text-gold">
-                    {Array.from({ length: rev.rating }).map((_, i) => (
-                      <Star key={i} className="w-3.5 h-3.5 fill-gold text-gold" />
-                    ))}
-                  </div>
-
-                  {/* Core Content */}
-                  <blockquote className="text-gray-300 text-xs sm:text-sm font-sans leading-relaxed font-light italic">
-                    &ldquo;{rev.content}&rdquo;
-                  </blockquote>
-                </div>
-
-                {/* Profile Details at footer */}
-                <div className="mt-8 pt-6 border-t border-white/5 flex gap-4 items-center">
-                  <div className="p-3 bg-purple-dark/50 border border-gold/15 rounded-full text-gold">
-                    <User className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <h5 className="text-white text-xs font-semibold uppercase tracking-wider font-mono">
-                      {rev.name}
-                    </h5>
-                    <div className="flex items-center gap-2 mt-1">
-                      <span className="text-[10px] text-gold-light uppercase tracking-widest font-mono">
-                        {rev.role} Client
-                      </span>
-                      <span className="text-[9px] text-gray-500 font-mono">
-                        | {rev.location}
-                      </span>
-                    </div>
+                  <h5 className="text-white text-xs font-semibold uppercase tracking-wider font-mono">
+                    {rev.name}
+                  </h5>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="text-[10px] text-gold-light uppercase tracking-widest font-mono">
+                      {rev.role} Client
+                    </span>
+                    <span className="text-[9px] text-gray-500 font-mono">
+                      | {rev.location}
+                    </span>
                   </div>
                 </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </div>
+              </div>
+            </div>
+          ))}
+        </motion.div>
 
         {/* Quality Commitment bottom stamp */}
         <div className="mt-16 text-center">
@@ -122,4 +121,6 @@ export default function Testimonials() {
       </div>
     </section>
   );
-}
+});
+
+export default Testimonials;

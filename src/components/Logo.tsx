@@ -7,10 +7,8 @@ interface LogoProps {
 }
 
 export default function Logo({ className = 'w-16 h-16', variant = 'gold', showText = true }: LogoProps) {
-  // Determine fill/stroke colors based on variant
   const goldColor = '#D4AF37';
   const lightColor = '#FFFFFF';
-  const darkColor = '#050505';
   
   const textColor = variant === 'light' ? lightColor : goldColor;
   const primaryColor = variant === 'light' ? lightColor : goldColor;
@@ -151,3 +149,4 @@ export default function Logo({ className = 'w-16 h-16', variant = 'gold', showTe
     </svg>
   );
 }
+
